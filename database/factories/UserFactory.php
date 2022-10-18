@@ -18,11 +18,16 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            // !! Check 53:52 in https://www.youtube.com/watch?v=MYyJ4PuL4pY  !!
+            // Eloquent Factories :https://laravel.com/docs/9.x/eloquent-factories
+            // Database Seeding: https://laravel.com/docs/9.x/seeding#using-model-factories
+
+            // The column names of the `users` table
+            'name'              => fake()->name(), // fake() which is FakerPHP, which is a PHP library to generate fake names, emails, hashed passwords, ...
+            'email'             => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token'    => Str::random(10),
         ];
     }
 
