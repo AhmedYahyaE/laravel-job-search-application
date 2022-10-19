@@ -50,21 +50,43 @@ Route::get('/search', function(\Illuminate\Http\Request $request) { // get the Q
 });
 */
 
-Route::get('/', function () {
-    return view('listings', [ // passing data to view
+Route::get('/', function () { // show All Listings in 'listings.blade.php'
+    return view('listings', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
         'heading'  => 'Latest Listings',
-        'listings' => [
-            [
-                'id'          => 1,
-                'title'       => 'Listing One',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
-            ],
-            [
-                'id'          => 2,
-                'title'       => 'Listing Two',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
-            ],
-        ]
+        'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
     ]);
 });
 
+/*
+Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listing.blade.php'    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+    $listing = \App\Models\Listing::find($id);
+    if ($listing) { // to avoid the error resulting in from directly typing in a non-existing id in the URL in the browser Address Bar
+        return view('listing', [ // passing data to view (will be used as variables view) ('listing')
+            // 'listing' => \App\Models\Listing::find($id)
+            'listing' => $listing
+        ]);
+    } else {
+        abort(404);
+    }
+    // return view('listing', [ // passing data to view (will be used as variables view) ('listing')
+    //     'listing' => \App\Models\Listing::find($id)
+    // ]);
+});
+*/
+
+// Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+Route::get('/listings/{listing}', function(\App\Models\Listing $listing) { // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // show a Single Listing in 'listing.blade.php'    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+    // $listing = \App\Models\Listing::find($id);
+    // if ($listing) { // to avoid the error resulting in from directly typing in a non-existing id in the URL in the browser Address Bar
+    //     return view('listing', [ // passing data to view (will be used as variables view) ('listing')
+    //         // 'listing' => \App\Models\Listing::find($id)
+    //         'listing' => $listing
+    //     ]);
+    // } else {
+    //     abort(404);
+    // }
+
+    return view('listing', [ // passing data to view (will be used as variables view) ('listing')
+        'listing' => $listing
+    ]);
+});
