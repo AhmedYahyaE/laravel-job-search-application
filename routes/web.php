@@ -52,7 +52,6 @@ Route::get('/search', function(\Illuminate\Http\Request $request) { // get the Q
 
 Route::get('/', function () { // show All Listings in 'listings.blade.php'
     return view('listings', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
-        'heading'  => 'Latest Listings',
         'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
     ]);
 });
