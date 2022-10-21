@@ -1,3 +1,7 @@
+{{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -50,7 +54,11 @@
     
         {{-- VIEW OUTPUT --}}
         <main>
-            @yield('content')
+            {{-- @yield('content') --}}
+
+            {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+            {{ $slot }}
+
         </main>
         {{-- VIEW OUTPUT --}}
 

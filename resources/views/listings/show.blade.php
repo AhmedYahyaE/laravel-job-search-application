@@ -1,10 +1,12 @@
 {{-- The Single Listing Page --}} {{-- this page is opened from the <a> anchor link elements in listing-card.blade.php. $listing is passed from the route in web.php or the controller --}}
-@extends('layout')
 
 
-@section('content')
+{{-- @extends('layout') --}}
+<x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+{{-- @section('content') --}}
     {{-- Include the Search Bar --}}
-    @include('partials._search')
+    {{-- @include('partials._search') --}}
 
 
 
@@ -68,4 +70,5 @@
 
         </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
     </div>
-@endsection
+{{-- @endsection --}}
+</x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}

@@ -1,4 +1,4 @@
-{{-- Category Tags like 'laravel' tag, 'Vue' tag, 'API' tag, ... --}} {{-- this Blade Component is used in listing-card.blade.php and listing.blade.php --}}
+{{-- Category Tags like 'laravel' tag, 'Vue' tag, 'API' tag, ... --}} {{-- this Blade Component is used (rendered) in listing-card.blade.php and listing.blade.php (listings/show.blade.php) --}}
 
 {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
 {{-- Data Properties / Attributes (using the @props Blade directive): https://laravel.com/docs/9.x/blade#data-properties-attributes --}}

@@ -1,8 +1,10 @@
 {{-- The ALL listings page --}}
-@extends('layout')
 
 
-@section('content')
+{{-- @extends('layout') --}}
+<x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+{{-- @section('content') --}}
     {{-- Include the Hero Image --}}
     @include('partials._hero')
 
@@ -29,4 +31,5 @@
             <p>No listings found</p>
         @endunless
     </div>
-@endsection
+{{-- @endsection --}}
+</x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}

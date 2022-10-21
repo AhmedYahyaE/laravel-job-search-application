@@ -1,6 +1,6 @@
-{{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- this Blade Component is used (rendered) in listings.blade.php --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+{{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- this Blade Component is used (rendered) in listings.blade.php (listings/index.blade.php) --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
 {{-- Data Properties / Attributes (using the @props Blade directive): https://laravel.com/docs/9.x/blade#data-properties-attributes --}}
-@props(['listing']) {{-- the array of variables that our Blade Component uses ($listing), that were passed from listings.blade.php --}}
+@props(['listing']) {{-- the array of variables that our Blade Component uses ($listing), that were passed from listings.blade.php (listings/index.blade.php) --}}
 
 
 <!-- Item -->
@@ -15,7 +15,7 @@
         />
         <div>
             <h3 class="text-2xl">
-                <a href="/listings/{{ $listing->id }}">{{ $listing->title }}</a> {{-- Go to listing.blade.php --}}
+                <a href="/listings/{{ $listing->id }}">{{ $listing->title }}</a> {{-- Go to listing.blade.php (listings/show.blade.php) --}}
             </h3>
             <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
 

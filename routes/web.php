@@ -50,14 +50,16 @@ Route::get('/search', function(\Illuminate\Http\Request $request) { // get the Q
 });
 */
 
-Route::get('/', function () { // show All Listings in 'listings.blade.php'
-    return view('listings', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
-        'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
-    ]);
-});
+// Route::get('/', function () { // show All Listings in 'listings.blade.php' (listings/index.blade.php)
+    // return view('listings', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
+    //     'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
+    // ]);
+// });
+Route::get('/', [App\Http\Controllers\ListingController::class, 'index']); // show All Listings in 'listings.blade.php' (listings/index.blade.php)
+
 
 /*
-Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listing.blade.php'    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listing.blade.php' (listings/show.blade.php)    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
     $listing = \App\Models\Listing::find($id);
     if ($listing) { // to avoid the error resulting in from directly typing in a non-existing id in the URL in the browser Address Bar
         return view('listing', [ // passing data to view (will be used as variables view) ('listing')
@@ -74,7 +76,7 @@ Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listin
 */
 
 // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
-Route::get('/listings/{listing}', function(\App\Models\Listing $listing) { // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // show a Single Listing in 'listing.blade.php'    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+// Route::get('/listings/{listing}', function(\App\Models\Listing $listing) { // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // show a Single Listing in 'listing.blade.php' (listings/show.blade.php)    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
     // $listing = \App\Models\Listing::find($id);
     // if ($listing) { // to avoid the error resulting in from directly typing in a non-existing id in the URL in the browser Address Bar
     //     return view('listing', [ // passing data to view (will be used as variables view) ('listing')
@@ -85,7 +87,9 @@ Route::get('/listings/{listing}', function(\App\Models\Listing $listing) { // Ro
     //     abort(404);
     // }
 
-    return view('listing', [ // passing data to view (will be used as variables view) ('listing')
-        'listing' => $listing
-    ]);
-});
+    // return view('listing', [ // passing data to view (will be used as variables view) ('listing')
+    //     'listing' => $listing
+    // ]);
+// });
+// Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+Route::get('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
