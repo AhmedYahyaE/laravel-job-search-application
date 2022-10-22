@@ -22,9 +22,21 @@ class ListingController extends Controller
 
 
     // Show ALL listings in listings/index.blade.php
-    public function index() { // e.g. Action: index, Verb: GET, URI: /photos, Route Name: photos.index
+    public function index(/*Request $request*/) { // e.g. Action: index, Verb: GET, URI: /photos, Route Name: photos.index
+        // Note: If you have a URL with Query String Parameters (e.g. '/search?name=Brad&city=Boston'), and you want to get those parameters, we pass in the Request $request object (as a Dependency Injection) to the route method or to the controller method, then write dd($request); (you'll find the Query String Parameters in the 'query' object), and to access a Query String Parameter, write dd($request->name), dd($request->city), Or just (WITHOUT Dependency Injection i.e. without passing in the Request $request) use the request() helper like this: dd(request()); (you'll find the Query String Parameters in the 'query' object) and to access a Query String Parameter, write dd(request()->city); OR dd(request('city')); . And if you want to get the Query String Parameters as an ARRAY of name & value, write dd(request(['city'])); . Check 22:29 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // 'tag' comes as a Query String Parameter from the <a> HTML anchor link element in the components/listing-tags.blade.php Blade Component which is used (rendered) in listings/show.blade.php and components/listing-card.blade.php (which, in turn, is used (rendered in listings/index.blade.php))
+        // dd(request()); // using the request() helper method    // is the same as:    dd($request); // You must in the Request $request object as a Dependency Injection
+        // dd(request('tag')); // is the same as: dd(request()->tag);    // is the same as:    dd($request->tag); // You must in the Request $request object as a Dependency Injection
+        // dd(request(['tag'])); // passing in 'tag' as an ARRAY
+        // dd(request(['tag', 'search'])); // passing in 'tag' and 'search' as an ARRAY
+
+
+        // 'Scope Filtering' of tags and the Search <form> in partials/_search.blade.php (which utilizes 'Query Scopes' (Local Scopes or Dynamic Scopes)), check 1:49:06 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // Query Scopes: https://laravel.com/docs/9.x/eloquent#query-scopes    // Local Scopes: https://laravel.com/docs/9.x/eloquent#local-scopes    // Dynamic Scopes: https://laravel.com/docs/9.x/eloquent#dynamic-scopes
         return view('listings.index', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
-            'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
+            // 'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
+            // 'listings' => \App\Models\Listing::latest()->filter(request(['tag']))->get() // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
+            'listings' => \App\Models\Listing::latest()->filter(request(['tag', 'search']))->get() // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
         ]);
     }
 
