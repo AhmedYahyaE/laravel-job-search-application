@@ -11,6 +11,12 @@ class Listing extends Model
 
 
 
+    // For solving the Mass Assignment problem with the create() method using TWO ways: firstly, using the $fillable and $guarded properties inside the model, OR secondly, using the     \Illuminate\Database\Eloquent\Model::unguard();     inside boot() method inside the 'AppServiceProvider', check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+    // First way: (for the second way, check 'AppServiceProvider.php')
+    // protected $fillable = ['title', 'company', 'location', 'email', 'website', 'tags', 'description'];
+
+
+
     // 'Scope Filtering' for tags (which utilizes 'Query Scopes' (Local Scopes or Dynamic Scopes)), check 1:49:06 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
     // Local Scopes: https://laravel.com/docs/9.x/eloquent#local-scopes    // To define a Local Scope, prefix an Eloquent model method with 'scope' word    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope
     // Dynamic Scopes: https://laravel.com/docs/9.x/eloquent#dynamic-scopes    // Note: Dynamic Scopes are Local Scopes, but they accept passing in parameters (after the $query parameter)
@@ -27,5 +33,7 @@ class Listing extends Model
                   ->orWhere('tags'       , 'like', '%' . request('search') . '%'); // e.g.    '%laravel%'    // the percent sign % SQL Wildcard    // search in the `tags`        column in `listings` table
         }
     }
+
+    
 
 }

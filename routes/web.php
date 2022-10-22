@@ -55,8 +55,15 @@ Route::get('/search', function(\Illuminate\Http\Request $request) { // get the Q
     //     'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
     // ]);
 // });
-Route::get('/', [App\Http\Controllers\ListingController::class, 'index']); // show All Listings in 'listings.blade.php' (listings/index.blade.php)
 
+// show All Listings in 'listings.blade.php' (listings/index.blade.php)
+Route::get('/', [App\Http\Controllers\ListingController::class, 'index']);
+
+// Render the Create a Listing <form> in listings/create.blade.php
+Route::get('/listings/create', [App\Http\Controllers\ListingController::class, 'create']); // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+
+// Store a new listing (submitting the previous create() <form> Or INSERT-ing a record for the first time)
+Route::post('/listings', [App\Http\Controllers\ListingController::class, 'store']); // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
 
 /*
 Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listing.blade.php' (listings/show.blade.php)    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
@@ -91,5 +98,6 @@ Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listin
     //     'listing' => $listing
     // ]);
 // });
-// Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
-Route::get('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
+// Show a Single Listing in 'listings.blade.php' (listings/show.blade.php)    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+Route::get('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'show']); // Route Conflict with the '/listings/create' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+
