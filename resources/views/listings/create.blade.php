@@ -28,6 +28,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="company"
+                    value="{{ old('company') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -44,6 +45,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="title"
+                    value="{{ old('title') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                     placeholder="Example: Senior Laravel Developer"
                 />
 
@@ -63,6 +65,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="location"
+                    value="{{ old('location') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                     placeholder="Example: Remote, Boston MA, etc"
                 />
 
@@ -80,6 +83,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="email"
+                    value="{{ old('email') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -99,6 +103,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="website"
+                    value="{{ old('website') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -115,6 +120,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="tags"
+                    value="{{ old('tags') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                     placeholder="Example: Laravel, Backend, Postgres, etc"
                 />
 
@@ -147,7 +153,9 @@
                     name="description"
                     rows="10"
                     placeholder="Include tasks, requirements, salary, etc"
-                ></textarea>
+                >
+                    {{ old('description') }} {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                </textarea>
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
                 @error('description')

@@ -16,7 +16,15 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+        {{-- Alpine.js --}} {{-- For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        <script src="//unpkg.com/alpinejs" defer></script>
+
+
+
+        <script src="https://cdn.tailwindcss.com"></script> {{-- Tailwind CSS --}}
         <script>
             tailwind.config = {
                 theme: {
@@ -75,5 +83,10 @@
                 >Post Job</a
             >
         </footer>
+
+
+        {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        <x-flash-message /> {{-- passing $listing to the Blade Component (listing-card.blade.php) --}} {{-- Passing Data To Components: https://laravel.com/docs/9.x/blade#passing-data-to-components --}}
+
     </body>
 </html>

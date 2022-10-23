@@ -70,9 +70,14 @@ class ListingController extends Controller
         // dd($formFields);
 
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties, check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Mass Assignment: https://laravel.com/docs/9.x/eloquent#mass-assignment
-        \App\Models\Listing::create($formFields);
+        \App\Models\Listing::create($formFields); // INSERT the VALIDATED <input> values    // \App\Models\Listing::create($request->all()); IS VERY DANGEROUS!!
+ 
+        // For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // For creating 'Flash Messages' and creating a special dedicated Blade Component file e.g. 'flash-message.blade.php' to display them using TWO ways, check 2:27:20 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // First way:
+        // \Illuminate\Support\Facades\Session::flash('message', 'Listing Created!');
 
-
-        return redirect('/'); // redirect to the home page
+        // Second way:
+        return redirect('/')->with('message', 'Listing created successfully!'); // redirect to the home page with a 'Flash Message'
     }
 }
