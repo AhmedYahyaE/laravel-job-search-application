@@ -31,5 +31,13 @@
             <p>No listings found</p>
         @endunless
     </div>
+
+
+    {{-- For Pagination explanation, check 2:38:46 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+    <div class="mt-6 p-4">
+        {{ $listings->links() }}
+    </div>
+
+
 {{-- @endsection --}}
 </x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
