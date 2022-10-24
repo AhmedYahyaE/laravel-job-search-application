@@ -62,6 +62,9 @@ class ListingController extends Controller
     // Store a new listing (submitting the previous create() <form> Or INSERT-ing a record for the first time)
     public function store(Request $request) { // e.g. Action: store, Verb: POST, URI: /listings, Route Name: listings.store
         // dd($request->all());
+        // dd($request['logo']);
+        // dd($request->logo);
+        // dd($request->file('logo'));
 
         // Validation    // Writing The Validation Logic: https://laravel.com/docs/9.x/validation#quick-writing-the-validation-logic
         $formFields = $request->validate([
@@ -73,8 +76,20 @@ class ListingController extends Controller
             'email'       => ['required', 'email'],
             'tags'        => 'required',
             'description' => 'required'
+            // 'logo'     => ['required', 'image']
         ]);
         // dd($formFields);
+        
+
+
+        // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        if ($request->hasFile('logo')) { // check if there's an uploaded file with an <input> field " name='logo' " HTML attribute
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files
+            // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
+        }
+        // dd($formFields);
+
+
 
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties, check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Mass Assignment: https://laravel.com/docs/9.x/eloquent#mass-assignment
         \App\Models\Listing::create($formFields); // INSERT the VALIDATED <input> values    // \App\Models\Listing::create($request->all()); IS VERY DANGEROUS!!

@@ -13,7 +13,10 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+    // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
+    // 'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,21 +33,21 @@ return [
 
     'disks' => [
 
-        'local' => [
-            'driver' => 'local',
+        'local' => [ // the 'local' disk
+            'driver' => 'local', // 'driver' is 'local', which is the same as with the 'public' disk
             'root' => storage_path('app'),
             'throw' => false,
         ],
 
-        'public' => [
-            'driver' => 'local',
+        'public' => [ // the 'public' disk
+            'driver' => 'local', // 'driver' is 'local', which is the same as with the 'local' disk
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
 
-        's3' => [
+        's3' => [ // the 's3' disk
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),

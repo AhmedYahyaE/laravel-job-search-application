@@ -10,7 +10,7 @@
     <div class="flex">
         <img
             class="hidden w-48 mr-6 md:block"
-            src="{{ asset('images/no-image.png') }}"
+            src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}} {{-- For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
             alt=""
         />
         <div>

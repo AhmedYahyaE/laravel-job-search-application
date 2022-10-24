@@ -14,7 +14,7 @@
             <p class="mb-4">Post a gig to find a developer</p>
         </header>
 
-        <form method="POST" action="/listings"> {{-- this will hit the POST method of the /listings route to hit the store() method in ListingController.php --}}
+        <form method="POST" action="/listings" enctype="multipart/form-data"> {{-- this will hit the POST method of the /listings route to hit the store() method in ListingController.php --}} {{-- Whenever you have a file <input> field (file upload/uploading files), you must include the attribute    enctype="multipart/form-data" --}}
             @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
 
 
@@ -130,7 +130,8 @@
                 @enderror
             </div>
 
-            {{-- <div class="mb-6">
+            {{-- For File Upload (Uploading files), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+            <div class="mb-6">
                 <label for="logo" class="inline-block text-lg mb-2">
                     Company Logo
                 </label>
@@ -139,7 +140,12 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="logo"
                 />
-            </div> --}}
+
+                {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
+                @error('logo')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p> {{-- Tailwind CSS classes --}} {{-- $message is a predefined error message by Laravel and changes according to the Validation Rules you have specified in the store() method in the ListingController --}}
+                @enderror                
+            </div>
 
             <div class="mb-6">
                 <label
