@@ -9,14 +9,14 @@
     > --}}
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
-                Create a Gig
+                Edit Gig
             </h2>
-            <p class="mb-4">Post a gig to find a developer</p>
+            <p class="mb-4">Edit: {{ $listing->title }}</p>
         </header>
 
-        <form method="POST" action="/listings" enctype="multipart/form-data"> {{-- this will hit the post() method of the /listings route to hit the store() method in ListingController.php --}} {{-- Whenever you have a file <input> field (file upload/uploading files), you must include the attribute    enctype="multipart/form-data" --}}
+        <form method="POST" action="/listings/{{ $listing->id }}" enctype="multipart/form-data"> {{-- this will hit the put() method of the /listings/{listing} route to hit the update() method in ListingController.php --}} {{-- Whenever you have a file <input> field (file upload/uploading files), you must include the attribute    enctype="multipart/form-data" --}}
             @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
-
+            @method('PUT') {{-- HTML <form>-s can't make PUT, PATCH, or DELETE requests, so you need to add a hidden _method field to spoof these HTTP verbs, using @method() Blade directive --}} {{-- Method Field: https://laravel.com/docs/9.x/blade#method-field --}}
 
             <div class="mb-6">
                 <label
@@ -28,7 +28,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="company"
-                    value="{{ old('company') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->company }}"
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -45,7 +45,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="title"
-                    value="{{ old('title') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->title }}"
                     placeholder="Example: Senior Laravel Developer"
                 />
 
@@ -65,7 +65,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="location"
-                    value="{{ old('location') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->location }}"
                     placeholder="Example: Remote, Boston MA, etc"
                 />
 
@@ -83,7 +83,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="email"
-                    value="{{ old('email') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->email }}"
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -103,7 +103,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="website"
-                    value="{{ old('website') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->website }}"
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -120,7 +120,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="tags"
-                    value="{{ old('tags') }}" {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    value="{{ $listing->tags }}"
                     placeholder="Example: Laravel, Backend, Postgres, etc"
                 />
 
@@ -139,6 +139,13 @@
                     type="file"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="logo"
+                />
+
+                {{-- show the logo image, if exists. If it doesn't, show a default image --}}
+                <img
+                    class="w-48 mr-6 mb-6"
+                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}} {{-- For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+                    alt=""
                 />
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -160,7 +167,7 @@
                     rows="10"
                     placeholder="Include tasks, requirements, salary, etc"
                 >
-                    {{ old('description') }} {{-- Repopulating Forms: https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                    {{ $listing->description }}
                 </textarea>
 
                 {{-- Displaying the Validation Errors using @error @enderror Blade directive --}}
@@ -173,7 +180,7 @@
                 <button
                     class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
                 >
-                    Create Gig
+                    Update Gig
                 </button>
 
                 <a href="/" class="text-black ml-4"> Back </a>

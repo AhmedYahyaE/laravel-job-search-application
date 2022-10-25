@@ -69,6 +69,19 @@
             </div>
 
         </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+
+
+        {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
+        <x-card class="mt-4 p-2 flex space-x-6"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}} {{-- Check 1:32:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+            <a href="/listings/{{ $listing->id }}/edit"> {{-- this will hit the get() method of the /listings/{listing}/edit route to hit the edit() method in ListingController.php --}}
+                <i class="fa-solid fa-pencil"></i> Edit
+            </a>
+        </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+
+
     </div>
 {{-- @endsection --}}
 </x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}

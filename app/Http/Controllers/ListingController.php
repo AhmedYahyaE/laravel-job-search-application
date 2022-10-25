@@ -49,6 +49,8 @@ class ListingController extends Controller
 
     // Show a SINGLE listing in listings/show.blade.php
     public function show(\App\Models\Listing $listing) { // e.g. Action: show, Verb: GET, URI: /listings/{listing}, Route Name: listings.show    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+        // dd($listing);
+
         return view('listings.show', [ // passing data to view (will be used as variables view) ('listing')
             'listing' => $listing
         ]);
@@ -79,7 +81,7 @@ class ListingController extends Controller
             // 'logo'     => ['required', 'image']
         ]);
         // dd($formFields);
-        
+
 
 
         // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
@@ -102,4 +104,61 @@ class ListingController extends Controller
         // Second way:
         return redirect('/')->with('message', 'Listing created successfully!'); // redirect to the home page with a 'Flash Message'
     }
+
+    // Render the Edit a Listing <form> in listings/edit.blade.php
+    public function edit(\App\Models\Listing $listing) { // e.g. Action: edit, Verb: GET, URI: /listings/{listing}/edit, Route Name: listings.edit    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {listing} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+        // dd($listing);
+
+        return view('listings.edit', [ // passing data to view (will be used as variables view) ('listing')
+            'listing' => $listing
+        ]);
+    }
+
+    // Update an already existing listing (submitting the previous edit() <form> Or UPDATE-ing an already existing record)
+    public function update(Request $request, \App\Models\Listing $listing) { // e.g. Action: update, Verb: PUT/PATCH, URI: /listings/{listing}, Route Name: listings.update    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {listing} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+        // dd($request->all());
+        // dd($request['logo']);
+        // dd($request->logo);
+        // dd($request->file('logo'));
+
+        // Validation    // Writing The Validation Logic: https://laravel.com/docs/9.x/validation#quick-writing-the-validation-logic
+        $formFields = $request->validate([
+            // Validation Rules: What rules we want for certain <form> <input> fields
+            'title'       => 'required',
+            // 'company'     => ['required', \Illuminate\Validation\Rule::unique('listings', 'company')], // specifying the `company` column of the `listings` table to be UNIQUE    // Note: When you have more than one validation rule for a certain <form> <input> field, use an ARRAY. Also, when you have a complicated validation rule that requires several arguments, you may use the Rule class \Illuminate\Validation\Rule::YOUR_RULE     to fluently construct the rule. Check https://laravel.com/docs/9.x/validation#rule-dimensions     AND     Check 2:15:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+            'company'     => 'required', // specifying the `company` column of the `listings` table to be UNIQUE    // Note: When you have more than one validation rule for a certain <form> <input> field, use an ARRAY. Also, when you have a complicated validation rule that requires several arguments, you may use the Rule class \Illuminate\Validation\Rule::YOUR_RULE     to fluently construct the rule. Check https://laravel.com/docs/9.x/validation#rule-dimensions     AND     Check 2:15:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+            'location'    => 'required',
+            'website'     => 'required',
+            'email'       => ['required', 'email'],
+            'tags'        => 'required',
+            'description' => 'required'
+            // 'logo'     => ['required', 'image']
+        ]);
+        // dd($formFields);
+
+
+
+        // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        if ($request->hasFile('logo')) { // check if there's an uploaded file with an <input> field " name='logo' " HTML attribute
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files
+            // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
+        }
+        // dd($formFields);
+
+
+
+        // For Mass Assignment with the create() method, and the $fillable and $guarded properties, check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Mass Assignment: https://laravel.com/docs/9.x/eloquent#mass-assignment
+        // \App\Models\Listing::create($formFields); // INSERT the VALIDATED <input> values    // \App\Models\Listing::create($request->all()); IS VERY DANGEROUS!!
+        $listing->update($formFields); // UPDATE the VALIDATED <input> values    // \App\Models\Listing::create($request->all()); IS VERY DANGEROUS!!
+ 
+        // For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // For creating 'Flash Messages' and creating a special dedicated Blade Component file e.g. 'flash-message.blade.php' to display them using TWO ways, check 2:27:20 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // First way:
+        // \Illuminate\Support\Facades\Session::flash('message', 'Listing Created!');
+
+        // Second way:
+        // return redirect('/')->with('message', 'Listing created successfully!'); // redirect to the home page with a 'Flash Message'
+        return back()->with('message', 'Listing updated successfully!'); // redirect back the last listings/edit.blade.php page with a 'Flash Message'
+    }
+
 }
