@@ -71,6 +71,9 @@ Route::get('/listings/{listing}/edit', [App\Http\Controllers\ListingController::
 // Update an already existing listing (submitting the previous edit() <form> Or UPDATE-ing an already existing record)    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
 Route::put('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'update']); // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
 
+// Delete an already existing listing    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+Route::delete('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'destroy']); // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
+
 /*
 Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listing.blade.php' (listings/show.blade.php)    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
     $listing = \App\Models\Listing::find($id);

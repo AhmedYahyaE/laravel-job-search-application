@@ -161,4 +161,17 @@ class ListingController extends Controller
         return back()->with('message', 'Listing updated successfully!'); // redirect back the last listings/edit.blade.php page with a 'Flash Message'
     }
 
+    // Delete an already existing listing
+    public function destroy(\App\Models\Listing $listing) { // e.g. Action: destroy, Verb: DELETE, URI: /listings/{listing}, Route Name: listings.delete    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {listing} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+        $listing->delete();
+
+        // For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // For creating 'Flash Messages' and creating a special dedicated Blade Component file e.g. 'flash-message.blade.php' to display them using TWO ways, check 2:27:20 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // First way:
+        // \Illuminate\Support\Facades\Session::flash('message', 'Listing Created!');
+
+        // Second way:
+        return redirect('/')->with('message', 'Listing deleted successfully'); // redirect to the home page with a 'Flash Message'
+    }
+
 }

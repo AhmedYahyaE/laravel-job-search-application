@@ -75,9 +75,27 @@
         {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
         {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
         <x-card class="mt-4 p-2 flex space-x-6"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}} {{-- Check 1:32:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+            
+            
+            
             <a href="/listings/{{ $listing->id }}/edit"> {{-- this will hit the get() method of the /listings/{listing}/edit route to hit the edit() method in ListingController.php --}}
                 <i class="fa-solid fa-pencil"></i> Edit
             </a>
+
+
+
+            {{-- Fore the Delete functionality, check 3:09:15 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+            <form method="POST" action="/listings/{{ $listing->id }}"> {{-- this will hit the delete() method of the /listings/{listing} route to hit the destroy() method in ListingController.php --}}
+                @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
+                @method('DELETE') {{-- HTML <form>-s can't make PUT, PATCH, or DELETE requests, so you need to add a hidden _method field to spoof these HTTP verbs, using @method() Blade directive --}} {{-- Method Field: https://laravel.com/docs/9.x/blade#method-field --}}
+
+                <button class="text-red-500">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </form>
+    
+
+     
         </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
 
 
