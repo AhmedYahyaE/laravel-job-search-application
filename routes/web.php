@@ -110,3 +110,10 @@ Route::get('/listings/{id}', function($id) { // show a Single Listing in 'listin
 // Show a Single Listing in 'listings.blade.php' (listings/show.blade.php)    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // this route will be accessed from the <a> HTML element in listings/listing-card.blade.php, in order to render listings/show.blade.php
 Route::get('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'show']); // Route Conflict with the '/listings/create' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
 
+
+
+// Render register <form> (create() a new user) in users/create.blade.php
+Route::get('/register', [App\Http\Controllers\UserController::class, 'create']); // we could call the method 'register' instead of 'create', but we try to stick to the Resource Controllers Naming Conventions as much as possible (Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller)
+
+// Store a new registering user (submitting the previous create() <form> (submitting the <form> of register/create a new user) Or INSERT-ing a record for the first time)
+Route::post('/users', [App\Http\Controllers\UserController::class, 'store']); // we could call the method 'submitRegister' instead of 'store', but we try to stick to the Resource Controllers Naming Conventions as much as possible (Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller)    // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
