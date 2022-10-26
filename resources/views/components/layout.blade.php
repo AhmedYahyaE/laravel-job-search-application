@@ -44,17 +44,48 @@
                 ><img class="w-24" src="{{ asset('images/logo.png') }}" alt="" class="logo"
             /></a>
             <ul class="flex space-x-6 mr-6 text-lg">
-                <li>
-                    <a href="/register" class="hover:text-laravel"
-                        ><i class="fa-solid fa-user-plus"></i> Register</a
-                    >
-                </li>
-                <li>
-                    <a href="/login" class="hover:text-laravel"
-                        ><i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        Login</a
-                    >
-                </li>
+                {{-- To remove the 'Register' and 'Login' links from the website view and show 'Logout' link when there's a logged in user (after logging in), because the presence of 'Register' or 'Login' wouldn't make sense if the user is already logged in, Check 3:29:34 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+                {{-- Authentication Directives (@auth @endauth or specifying the authentication guard like @auth('the_authentication_guard') and @guest @endguest or specifying the authentication guard like @guest('the_authentication_guard')): https://laravel.com/docs/9.x/blade#authentication-directives --}} 
+                @auth {{-- Authentication Directives: https://laravel.com/docs/9.x/blade#authentication-directives --}}
+
+                    <li>
+                        <span class="font-bold uppercase">
+                            Welcome {{ auth()->user()->name }} {{-- Retrieving The Authenticated User: https://laravel.com/docs/9.x/authentication#retrieving-the-authenticated-user --}}
+                        </span>
+                    </li>
+                    <li>
+                        <a href="/listings/manage" class="hover:text-laravel"
+                            ><i class="fa-solid fa-gear"></i>
+                            Manage Listings</a
+                        >
+                    </li>
+                    <li>
+                        <form class="inline" method="POST" action="logout"> {{-- this will hit the post() method of the /logout route to hit the logout() method in UserController.php --}}
+                            @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
+
+
+                            <button type="submit">
+                                <i class="fa-solid fa-door-closed"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+
+                @else {{-- Note: the @guest @endguest Blade directive could be used here instead of @else!! -- If the user is not authenticated i.e. the user is a guest --}}
+                    
+                    <li>
+                        <a href="/register" class="hover:text-laravel"
+                            ><i class="fa-solid fa-user-plus"></i> Register</a
+                        >
+                    </li>
+                    <li>
+                        <a href="/login" class="hover:text-laravel"
+                            ><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Login</a
+                        >
+                    </li>
+
+                @endauth
+
             </ul>
         </nav>
 

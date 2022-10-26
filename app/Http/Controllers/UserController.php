@@ -65,4 +65,15 @@ class UserController extends Controller
         return redirect('/')->with('message', 'User created and logged in'); // redirect to the home page with a 'Flash Message'
     }
 
+    // Log user out (user logout)
+    public function logout(Request $request) {
+        // For the complete process (code) of logging out, check 3:48:18 in https://www.youtube.com/watch?v=MYyJ4PuL4pY     AND     Check Logging Out: https://laravel.com/docs/9.x/authentication#logging-out     AND     Check Regenerating The Session ID (using invalidate() and regenerateToken() methods): https://laravel.com/docs/9.x/session#regenerating-the-session-id     AND     Check Preventing CSRF Requests: https://laravel.com/docs/9.x/csrf#preventing-csrf-requests
+        // Logging Out: https://laravel.com/docs/9.x/authentication#logging-out
+        auth()->logout(); // log the user out by removing the authenticated user information (the logged in user) from session
+        $request->session()->invalidate(); // https://laravel.com/docs/9.x/session#regenerating-the-session-id
+        $request->session()->regenerateToken(); // regenerate the session's CSRF token
+
+        return redirect('/')->with('message', 'You have been logged out!'); // redirect to the home page with a 'Flash Message'
+    }
+
 }

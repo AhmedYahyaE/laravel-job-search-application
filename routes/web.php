@@ -117,3 +117,6 @@ Route::get('/register', [App\Http\Controllers\UserController::class, 'create']);
 
 // Store a new registering user (submitting the previous create() <form> (submitting the <form> of register/create a new user) Or INSERT-ing a record for the first time)
 Route::post('/users', [App\Http\Controllers\UserController::class, 'store']); // we could call the method 'submitRegister' instead of 'store', but we try to stick to the Resource Controllers Naming Conventions as much as possible (Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller)    // Route Conflict with the '/listings/{listing}' Route, Check 2:06:40 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Actions Handled By Resource Controller: https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller
+
+// Log user out (user logout)
+Route::post('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
