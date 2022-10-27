@@ -18,8 +18,11 @@ class ListingFactory extends Factory
     {
         return [
             // !! Check 53:52 in https://www.youtube.com/watch?v=MYyJ4PuL4pY  !!
+            // Check DatabaseSeeder.php file!!
             // Eloquent Factories :https://laravel.com/docs/9.x/eloquent-factories
             // Database Seeding: https://laravel.com/docs/9.x/seeding#using-model-factories
+
+            // Note !!: WE DIDN'T INCLUDE THE `user_id` FIELD/COLUMN HERE! WE INCLUDED IN DatabaseSeeder.php file!!
 
             // The column names of the `listings` table
             // 'title'       => $this->faker->title(), // fake() which is FakerPHP, which is a PHP library to generate fake names, emails, hashed passwords, ...
