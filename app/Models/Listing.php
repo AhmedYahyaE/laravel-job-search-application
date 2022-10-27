@@ -34,6 +34,12 @@ class Listing extends Model
         }
     }
 
-    
+
+
+    // For Relationships (and using foreignId(), constrained() and onDelete('cascade') methods), check 3:51:29 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+    // Relationship of a Listing `listings` with User `users`
+    public function user() { // user() in the SINGULAR!    // A Listing `listings` belongs to a User `users`, and the Foreign Key of the Relationship is the `user_id` column
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the Foreign Key of the Relationhip
+    }
 
 }

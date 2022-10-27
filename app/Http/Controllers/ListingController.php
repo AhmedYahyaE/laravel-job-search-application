@@ -93,6 +93,11 @@ class ListingController extends Controller
 
 
 
+        // Persist (Enter) the `user_id` column of the `listings` table (which references the `id` of the `users` table) (Enter the user id of the user who is submitting the create a listing <form> (the user who is currently authenticated/logged in))
+        $formFields['user_id'] = auth()->id(); // auth()->id()    is the `id` column of `users` table
+
+
+
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties, check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Mass Assignment: https://laravel.com/docs/9.x/eloquent#mass-assignment
         \App\Models\Listing::create($formFields); // INSERT the VALIDATED <input> values    // \App\Models\Listing::create($request->all()); IS VERY DANGEROUS!!
  
