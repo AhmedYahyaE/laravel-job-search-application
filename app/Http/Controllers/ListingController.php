@@ -51,13 +51,15 @@ class ListingController extends Controller
     public function show(\App\Models\Listing $listing) { // e.g. Action: show, Verb: GET, URI: /listings/{listing}, Route Name: listings.show    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {id} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
         // dd($listing);
 
-        return view('listings.show', [ // passing data to view (will be used as variables view) ('listing')
+        return view('listings.show', [ // passing data to view (will be used as variables in view) ('listing')
             'listing' => $listing
         ]);
     }
 
     // Render the Create a Listing <form> in listings/create.blade.php
     public function create() { // e.g. Action: create, Verb: GET, URI: /listings/create, Route Name: listings.create
+        // $listing = \App\Models\Listing::pluck('id');
+        // dd($listing);
         return view('listings.create');
     }
 
@@ -114,7 +116,7 @@ class ListingController extends Controller
     public function edit(\App\Models\Listing $listing) { // e.g. Action: edit, Verb: GET, URI: /listings/{listing}/edit, Route Name: listings.edit    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {listing} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
         // dd($listing);
 
-        return view('listings.edit', [ // passing data to view (will be used as variables view) ('listing')
+        return view('listings.edit', [ // passing data to view ('listing' will be used as variables in view) ($listing)
             'listing' => $listing
         ]);
     }
@@ -125,6 +127,17 @@ class ListingController extends Controller
         // dd($request['logo']);
         // dd($request->logo);
         // dd($request->file('logo'));
+
+
+
+        // For Authorization (Example: You typically/usually want the logged in/authenticated user to be able to Edit or Delete their OWN posts ONLY, and not other users' posts), check 4:14:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // Authorization: https://laravel.com/docs/9.x/authorization
+        // Make sure that the currently authenticated/logged in user is an OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
+        if ($listing->user_id != auth()->id()) { // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
+            abort(403, 'Unauthorized Action');
+        }
+
+
 
         // Validation    // Writing The Validation Logic: https://laravel.com/docs/9.x/validation#quick-writing-the-validation-logic
         $formFields = $request->validate([
@@ -168,6 +181,15 @@ class ListingController extends Controller
 
     // Delete an already existing listing
     public function destroy(\App\Models\Listing $listing) { // e.g. Action: destroy, Verb: DELETE, URI: /listings/{listing}, Route Name: listings.delete    // Route Model Binding: https://laravel.com/docs/9.x/routing#route-model-binding    // Check 1:26:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // {listing} is a Route Parameters: https://laravel.com/docs/9.x/routing#route-parameters
+        // For Authorization (Example: You typically/usually want the logged in/authenticated user to be able to Edit or Delete their OWN posts ONLY, and not other users' posts), check 4:14:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // Authorization: https://laravel.com/docs/9.x/authorization
+        // Make sure that the currently authenticated/logged in user is an OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
+        if ($listing->user_id != auth()->id()) { // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
+            abort(403, 'Unauthorized Action');
+        }
+
+
+
         $listing->delete();
 
         // For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
@@ -177,6 +199,13 @@ class ListingController extends Controller
 
         // Second way:
         return redirect('/')->with('message', 'Listing deleted successfully'); // redirect to the home page with a 'Flash Message'
+    }
+
+    // Render User Manage Listings page in listings/manage.blade.php (show the listings that ONLY BELONG to the currently logged in/authenticated user (not all listings) in order for him/her to manage his/her listings)
+    public function manage() {
+        return view('listings.manage', [
+            'listings' => auth()->user()->listings()->get() // passing data to view (passing the listings of the currently authenticated/logged in user ONLY to view (listings/manage.blade.php))
+        ]);
     }
 
 }
