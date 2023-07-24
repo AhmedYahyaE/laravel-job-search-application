@@ -12,7 +12,8 @@
 <ul class="flex">
     @foreach ($tags as $tag)
         <li class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs">
-            <a href="/?tag={{ $tag }}">{{ $tag }}</a> {{-- When a tag is clicked (using the <a> HTML element and Query String Parameters), filter the listings by that tag --}} {{-- this <a> anchor link hits the index() method in ListingController --}}
+            {{-- We'll apply a Scope Filter on tags. Check index() method in ListingController.php and Listing.php model --}}
+            <a href="/?tag={{ $tag }}">{{ $tag }}</a> {{-- When a tag is clicked (using the <a> HTML element and Query String Parameters), filter (using a Scoper Filter which utilizes Laravel Query Scopes (Check the index() method in ListingController.php)) the listings by that tag --}} {{-- this <a> anchor link hits the index() method in ListingController --}}
         </li>
     @endforeach
 </ul>

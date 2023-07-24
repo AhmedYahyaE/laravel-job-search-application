@@ -45,12 +45,12 @@ class UserController extends Controller
 
 
 
-        // Note: We'll register the user and AUTOMATICALLY LOGIN THEM! using the login() method    // Manually Authenticating Users: https://laravel.com/docs/9.x/authentication#authenticating-users    // Check 3:25:28 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // Note: We'll register the user and IMMEDIATELY and AUTOMATICALLY and DIRECTLY LOGIN THEM! using the login() method    // Manually Authenticating Users: https://laravel.com/docs/9.x/authentication#authenticating-users    // Check 3:25:28 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         $user = \App\Models\User::create($formFields); // create (INSERT) the new registering user in the `users` table
         // dd($user);
 
-        // Login the user AUTOMATICALLY after registration success!
-        auth()->login($user); // AUTOMATICALLY Login (Authenticate) the newly registered user (make a certain user the currently authenticated user (i.e. the logged in user) (Set an existing user instance as the currently authenticated user): Authenticate A User Instance: https://laravel.com/docs/9.x/authentication#authenticate-a-user-instance
+        // Login the user in IMMEDIATELY and AUTOMATICALLY and DIRECTLY after registration success!
+        auth()->login($user); // IMMEDIATELY and AUTOMATICALLY and DIRECTLY Log (Authenticate) the newly registered user in (make a certain user the currently authenticated user (i.e. the logged in user)) (Set an existing user instance as the currently authenticated user): Authenticate A User Instance: https://laravel.com/docs/9.x/authentication#authenticate-a-user-instance
 
 
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties, check 2:21:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // Mass Assignment: https://laravel.com/docs/9.x/eloquent#mass-assignment

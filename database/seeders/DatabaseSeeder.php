@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // Eloquent Factories :https://laravel.com/docs/9.x/eloquent-factories
         // Database Seeding: https://laravel.com/docs/9.x/seeding#using-model-factories
 
-        // Note:: ALL THE FOLLOWING SEEDING RUNS WITH THE Artisan COMMAND: 'php artisan db:seed'
+        // Note:: ALL THE FOLLOWING SEEDING RUNS USING THE Artisan COMMAND: 'php artisan db:seed'
         // \App\Models\User::factory(5)->create(); // '5' means insert '5' records    // check UserFactory.php
 
         // When using Model Factories, if you want to (define hard-coded factories values) create a certain field/column (e.g. user) with certain field/column values you want them to be exactly a certain way (Hard-coded Database Seeding), inside the create() method of the factory, use an array and type in your desired fields/columns and their values. Check 3:52:38 in https://www.youtube.com/watch?v=MYyJ4PuL4pY

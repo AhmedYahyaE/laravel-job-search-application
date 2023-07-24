@@ -22,26 +22,35 @@ class ListingController extends Controller
 
 
     // Show ALL listings in listings/index.blade.php
-    public function index(/*Request $request*/) { // e.g. Action: index, Verb: GET, URI: /listings, Route Name: listings.index
+    public function index(/* Request $request */) { // e.g. Action: index, Verb: GET, URI: /listings, Route Name: listings.index
         // Note: If you have a URL with Query String Parameters (e.g. '/search?name=Brad&city=Boston'), and you want to get those parameters, we pass in the Request $request object (as a Dependency Injection) to the route method or to the controller method, then write dd($request); (you'll find the Query String Parameters in the 'query' object), and to access a Query String Parameter, write dd($request->name), dd($request->city), Or just (WITHOUT Dependency Injection i.e. without passing in the Request $request) use the request() helper like this: dd(request()); (you'll find the Query String Parameters in the 'query' object) and to access a Query String Parameter, write dd(request()->city); OR dd(request('city')); . And if you want to get the Query String Parameters as an ARRAY of name & value, write dd(request(['city'])); . Check 22:29 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         // 'tag' comes as a Query String Parameter from the <a> HTML anchor link element in the components/listing-tags.blade.php Blade Component which is used (rendered) in listings/show.blade.php and components/listing-card.blade.php (which, in turn, is used (rendered in listings/index.blade.php))
         // dd(request()); // using the request() helper method    // is the same as:    dd($request); // You must in the Request $request object as a Dependency Injection
+
         // dd(request('tag')); // is the same as: dd(request()->tag);    // is the same as:    dd($request->tag); // You must in the Request $request object as a Dependency Injection
         // dd(request(['tag'])); // passing in 'tag' as an ARRAY
+
+        // dd(request('search')); // is the same as: dd(request()->search);    // is the same as:    dd($request->search); // You must in the Request $request object as a Dependency Injection
+        // dd(request(['search'])); // passing in 'search' as an ARRAY
+
         // dd(request(['tag', 'search'])); // passing in 'tag' and 'search' as an ARRAY
+
+        // dd($request->input());
 
         // Test the paginate() method:
         // dd(\App\Models\Listing::latest()->filter(request(['tag', 'search']))->paginate(2));
 
 
-        // 'Scope Filtering' of tags and the Search <form> in partials/_search.blade.php (which utilizes 'Query Scopes' (Local Scopes or Dynamic Scopes)), check 1:49:06 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+        // 'Scope Filtering' of tags (the <a> HTML element in components/listing-tags.blade.php) and the Search Bar <form> in partials/_search.blade.php (which utilizes 'Query Scopes' (Local Scopes or Dynamic Scopes)), check 1:49:06 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         // Query Scopes: https://laravel.com/docs/9.x/eloquent#query-scopes    // Local Scopes: https://laravel.com/docs/9.x/eloquent#local-scopes    // Dynamic Scopes: https://laravel.com/docs/9.x/eloquent#dynamic-scopes
         return view('listings.index', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
             // 'listings' => \App\Models\Listing::all() // this returns an Eloquent Collection
-            // 'listings' => \App\Models\Listing::latest()->filter(request(['tag']))->get() // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
+            // 'listings' => \App\Models\Listing::latest()->filter(request(['tag']))->get() // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> HTML element in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
             // 'listings' => \App\Models\Listing::latest()->filter(request(['tag', 'search']))->get() // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
 
             // For Pagination explanation, check 2:38:46 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+
+            // Dynamic Scopes: https://laravel.com/docs/9.x/eloquent#dynamic-scopes
             'listings' => \App\Models\Listing::latest()->filter(request(['tag', 'search']))->paginate(6) // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
             // 'listings' => \App\Models\Listing::latest()->filter(request(['tag', 'search']))->simplePaginate(2) // we call the scopeFilter() method in the Listing.php model, but we remove the 'scope' prefix (for filtering with tags)    // Utilizing A Local Scope: https://laravel.com/docs/9.x/eloquent#utilizing-a-local-scope    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
         ]);
@@ -63,7 +72,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
-    // Store a new listing (submitting the previous create() <form> Or INSERT-ing a record for the first time)
+    // Store a new listing (submitting the previous create() <form> (HTML Form Submission) Or INSERT-ing a record for the first time)
     public function store(Request $request) { // e.g. Action: store, Verb: POST, URI: /listings, Route Name: listings.store
         // dd($request->all());
         // dd($request['logo']);
@@ -88,8 +97,9 @@ class ListingController extends Controller
 
         // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         if ($request->hasFile('logo')) { // check if there's an uploaded file with an <input> field " name='logo' " HTML attribute
-            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files
-            // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
+            // Using Laravel's 'storage' directory instead of the traditional 'public' directory for storing user-uploaded files. Then we create a Symbolic Link (shortcut) between the 'public/storage' directory and 'storage/app/public' directory.
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files    AND    https://laravel.com/docs/9.x/filesystem#file-uploads    AND    https://laravel.com/docs/9.x/filesystem#specifying-a-disk
+            // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the user-uploaded files publicly accessible from the web!
         }
         // dd($formFields);
 
@@ -132,8 +142,8 @@ class ListingController extends Controller
 
         // For Authorization (Example: You typically/usually want the logged in/authenticated user to be able to Edit or Delete their OWN posts ONLY, and not other users' posts), check 4:14:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         // Authorization: https://laravel.com/docs/9.x/authorization
-        // Make sure that the currently authenticated/logged in user is an OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
-        if ($listing->user_id != auth()->id()) { // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
+        // Make sure that the currently authenticated/logged in user is the OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
+        if ($listing->user_id != auth()->id()) { // if that listing doesn't belong to the currently authenticated user, prevent that user from being able to edit that listing (Or another way to go is using Laravel Policies (Authorization). Check my portfolio "Instagram Clone" project's ProfilePolicy.php class file.)    // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
             abort(403, 'Unauthorized Action');
         }
 
@@ -158,7 +168,8 @@ class ListingController extends Controller
 
         // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         if ($request->hasFile('logo')) { // check if there's an uploaded file with an <input> field " name='logo' " HTML attribute
-            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files
+            // Using Laravel's 'storage' directory instead of the traditional 'public' directory for storing user-uploaded files. Then we create a Symbolic Link (shortcut) between the 'public/storage' directory and 'storage/app/public' directory.
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public'); // Add the uploaded file path (which is the `logo` column (in `listings` table) value to the already validated $formFields array i.e.    'logo' => 'filepath'    // store('logos', 'public') (    store($path, $disk)    )    will create a 'logos' folder, and store the uploaded files inside storage/app/public/logos    using the 'public' disk, as we changed the Default disk from 'local' to 'public' (    'root' => storage_path('app/public')    ) in config/filesystems.php file, so DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!    // Note: The store($path, $disk) method will return the path of the file relative to the disk's root: https://laravel.com/docs/9.x/requests#storing-uploaded-files    AND    https://laravel.com/docs/9.x/filesystem#file-uploads    AND    https://laravel.com/docs/9.x/filesystem#specifying-a-disk
             // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
         }
         // dd($formFields);

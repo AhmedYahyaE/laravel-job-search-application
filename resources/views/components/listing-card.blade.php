@@ -1,6 +1,7 @@
+{{-- This Blade Component is used/included in listings/index.blade.php and other various files --}}
 {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- this Blade Component is used (rendered) in listings.blade.php (listings/index.blade.php) --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
 {{-- Data Properties / Attributes (using the @props Blade directive): https://laravel.com/docs/9.x/blade#data-properties-attributes --}}
-@props(['listing']) {{-- the array of variables that our Blade Component uses ($listing), that were passed from listings.blade.php (listings/index.blade.php) --}}
+@props(['listing']) {{-- the array of variables that our Blade Component uses ($listing), that were passed in from listings.blade.php (listings/index.blade.php) --}}
 
 
 <!-- Item -->

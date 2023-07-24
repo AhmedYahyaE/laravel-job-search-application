@@ -1,3 +1,4 @@
+{{-- This Blade Component is used/included in components/layout.blade.php --}}
 {{-- For creating 'Flash Messages' and creating a special Blade Component file e.g. 'flash-message.blade.php' to display them using TWO ways, check 2:27:20 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
 
 {{-- Determining If An Item Exists In The Session: https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}

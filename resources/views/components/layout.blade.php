@@ -93,10 +93,10 @@
     
         {{-- VIEW OUTPUT --}}
         <main>
-            {{-- @yield('content') --}}
 
             {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
             {{ $slot }}
+            {{-- @yield('content') --}}
 
         </main>
         {{-- VIEW OUTPUT --}}
@@ -117,7 +117,7 @@
 
 
         {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-        <x-flash-message /> {{-- passing $listing to the Blade Component (listing-card.blade.php) --}} {{-- Passing Data To Components: https://laravel.com/docs/9.x/blade#passing-data-to-components --}}
+        <x-flash-message /> {{-- Check components/flash-message.blade.php --}} {{-- passing $listing to the Blade Component (listing-card.blade.php) --}} {{-- Passing Data To Components: https://laravel.com/docs/9.x/blade#passing-data-to-components --}}
 
     </body>
 </html>

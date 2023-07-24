@@ -23,10 +23,13 @@ class Listing extends Model
     public function scopeFilter($query, array $filters) { // filtering the 'tags' and the Search <form>    // To define a Local Scope, prefix an Eloquent model method with 'scope' word    // this method is called by the filter() method inside index() method in ListingController.php
         // dd($filters);
         // dd($filters['tag']);
-        if ($filters['tag'] ?? false) { // 'tag' is for the tags    // '??' Null coalescing operator    // this means if there's $filters['tag'], get into the if statement block and execute what's in there. If there isn't $filters['tag'], don't do anything!
+
+        // Filtering tags (the <a> HTML element in components/listing-tags.blade.php)
+        if ($filters['tag'] ?? false) { // 'tag' is for the tags    // '??' Null coalescing operator    // this means if there's $filters['tag'], get into the if statement block and execute what's in there. If there isn't $filters['tag'], don't do anything!    // The null coalescing operator ?? is used to provide a default value if the expression on the left side is 'null', 'undefined', or evaluates to 'false'. In this case, if $filters['tag'] is 'not set' or evaluates to 'null', the expression will be replaced by 'false'
             $query->where('tags', 'like', '%' . request('tag') . '%'); // e.g.    '%laravel%'    // the percent sign % SQL Wildcard    // search in the `tags` column in `listings` table
         }
 
+        // Filtering the Search Form value (in partials/_search.blade.php)
         if ($filters['search'] ?? false) { // 'search' is for the Search <form>    // '??' Null coalescing operator    // this means if there's $filters['tag'], get into the if statement block and execute what's in there. If there isn't $filters['tag'], don't do anything!
             $query->where(  'title'      , 'like', '%' . request('search') . '%')  // e.g.    '%laravel%'    // the percent sign % SQL Wildcard    // search in the `title`       column in `listings` table
                   ->orWhere('description', 'like', '%' . request('search') . '%')  // e.g.    '%laravel%'    // the percent sign % SQL Wildcard    // search in the `description` column in `listings` table

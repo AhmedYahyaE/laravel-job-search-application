@@ -19,6 +19,8 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        // Note: This is the 'guest' middleware. Check app/Http/Kernel.php
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
