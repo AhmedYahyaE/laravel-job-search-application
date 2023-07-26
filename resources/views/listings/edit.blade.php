@@ -9,7 +9,7 @@
     > --}}
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
-                Edit Gig
+                Edit Job
             </h2>
             <p class="mb-4">Edit: {{ $listing->title }}</p>
         </header>
@@ -180,7 +180,7 @@
                 <button
                     class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
                 >
-                    Update Gig
+                    Update Job
                 </button>
 
                 <a href="/" class="text-black ml-4"> Back </a>

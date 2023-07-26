@@ -1,7 +1,3 @@
-{{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,7 +15,7 @@
 
 
 
-        {{-- Alpine.js --}} {{-- For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package. Check 2:32:45 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        {{-- Alpine.js --}} {{-- For removing a 'Flash Message' after a certain amount of time (to make it disappear after a certain amount of time), we use Alpine.js package --}}
         <script src="//unpkg.com/alpinejs" defer></script>
 
 
@@ -30,27 +26,26 @@
                 theme: {
                     extend: {
                         colors: {
-                            laravel: "#ef3b2d",
+                            laravel: "#FFAA33",
                         },
                     },
                 },
             };
         </script>
-        <title>LaraGigs | Find Laravel Jobs & Projects</title>
+        <title>YourJob | Find Laravel Jobs & Projects</title>
     </head>
     <body class="mb-48">
         <nav class="flex justify-between items-center mb-4">
             <a href="/"
-                ><img class="w-24" src="{{ asset('images/logo.png') }}" alt="" class="logo"
+                ><img class="w-24" src="{{ asset('images/jobs-logo.jpg') }}" alt="" class="logo"
             /></a>
             <ul class="flex space-x-6 mr-6 text-lg">
-                {{-- To remove the 'Register' and 'Login' links from the website view and show 'Logout' link when there's a logged in user (after logging in), because the presence of 'Register' or 'Login' wouldn't make sense if the user is already logged in, Check 3:29:34 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-                {{-- Authentication Directives (@auth @endauth or specifying the authentication guard like @auth('the_authentication_guard') and @guest @endguest or specifying the authentication guard like @guest('the_authentication_guard')): https://laravel.com/docs/9.x/blade#authentication-directives --}} 
+                {{-- To remove the 'Register' and 'Login' links from the website view and show 'Logout' link when there's a logged in user (after logging in), because the presence of 'Register' or 'Login' wouldn't make sense if the user is already logged in --}}
                 @auth {{-- Authentication Directives: https://laravel.com/docs/9.x/blade#authentication-directives --}}
 
                     <li>
                         <span class="font-bold uppercase">
-                            Welcome {{ auth()->user()->name }} {{-- Retrieving The Authenticated User: https://laravel.com/docs/9.x/authentication#retrieving-the-authenticated-user --}}
+                            Welcome {{ auth()->user()->name }}
                         </span>
                     </li>
                     <li>
@@ -60,9 +55,8 @@
                         >
                     </li>
                     <li>
-                        <form class="inline" method="POST" action="logout"> {{-- this will hit the post() method of the /logout route to hit the logout() method in UserController.php --}}
-                            @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
-
+                        <form class="inline" method="POST" action="/logout">
+                            @csrf
 
                             <button type="submit">
                                 <i class="fa-solid fa-door-closed"></i> Logout
@@ -70,7 +64,7 @@
                         </form>
                     </li>
 
-                @else {{-- Note: the @guest @endguest Blade directive could be used here instead of @else!! -- If the user is not authenticated i.e. the user is a guest --}}
+                @else
                     
                     <li>
                         <a href="/register" class="hover:text-laravel"
@@ -94,7 +88,6 @@
         {{-- VIEW OUTPUT --}}
         <main>
 
-            {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
             {{ $slot }}
             {{-- @yield('content') --}}
 
@@ -110,14 +103,13 @@
 
             <a
                 href="/listings/create"
-                class="absolute top-1/3 right-10 bg-black text-white py-2 px-5"
+                class="absolute top-1/3 right-10 bg-blue-950 text-white py-2 px-5"
                 >Post Job</a
             >
         </footer>
 
-
-        {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-        <x-flash-message /> {{-- Check components/flash-message.blade.php --}} {{-- passing $listing to the Blade Component (listing-card.blade.php) --}} {{-- Passing Data To Components: https://laravel.com/docs/9.x/blade#passing-data-to-components --}}
+        {{-- Blade Component --}}
+        <x-flash-message />
 
     </body>
 </html>

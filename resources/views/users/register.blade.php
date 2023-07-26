@@ -12,7 +12,7 @@
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Register
             </h2>
-            <p class="mb-4">Create an account to post gigs</p>
+            <p class="mb-4">Create an account to post jobs</p>
         </header>
 
         <form method="POST" action="/users">  {{-- this will hit the post() method of the /users route to hit the store() method in UserController.php --}}
