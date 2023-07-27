@@ -15,7 +15,7 @@ return [
 
 
     // 'default' => env('FILESYSTEM_DISK', 'local'),
-    'default' => env('FILESYSTEM_DISK', 'public'), // We changed 'local' to 'public' ourselves    // For File Upload (Uploading files (user-uploaded files)) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY    // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files web/publicly accessible from the web!
+    'default' => env('FILESYSTEM_DISK', 'public'), // We changed 'local' to 'public' ourselves    // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files web/publicly accessible from the web!
 
     /*
     |--------------------------------------------------------------------------

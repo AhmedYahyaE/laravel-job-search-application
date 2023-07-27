@@ -83,12 +83,10 @@ class ListingController extends Controller
 
     // Update an already existing listing (submitting the previous edit() <form> Or UPDATE-ing an already existing record)
     public function update(Request $request, \App\Models\Listing $listing) {
-        // For Authorization (Example: You typically/usually want the logged in/authenticated user to be able to Edit or Delete their OWN posts ONLY, and not other users' posts), check 4:14:00 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
         // Make sure that the currently authenticated/logged in user is the OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
-        if ($listing->user_id != auth()->id()) { // if that listing doesn't belong to the currently authenticated user, prevent that user from being able to edit that listing (Or another way to go is using Laravel Policies (Authorization). Check my portfolio "Instagram Clone" project's ProfilePolicy.php class file.)    // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
+        if ($listing->user_id != auth()->id()) { // if that listing doesn't belong to the currently authenticated user, prevent that user from being able to edit that listing (Or another way to go is using Laravel Policies (Authorization)
             abort(403, 'Unauthorized Action');
         }
-
 
 
         // Validation
@@ -104,7 +102,6 @@ class ListingController extends Controller
         // dd($formFields);
 
 
-
         // For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command)
         if ($request->hasFile('logo')) { // check if there's an uploaded file with an <input> field " name='logo' " HTML attribute
             // Using Laravel's 'storage' directory instead of the traditional 'public' directory for storing user-uploaded files. Then we create a Symbolic Link (shortcut) between the 'public/storage' directory and 'storage/app/public' directory.
@@ -112,7 +109,6 @@ class ListingController extends Controller
             // DON'T FORGET to create the SYMBOLIC LINK using the 'php artisan storage:link' command to make the uploaded files publicly accessible from the web!
         }
         // dd($formFields);
-
 
 
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties
@@ -128,7 +124,6 @@ class ListingController extends Controller
         if ($listing->user_id != auth()->id()) { // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
             abort(403, 'Unauthorized Action');
         }
-
 
 
         $listing->delete();

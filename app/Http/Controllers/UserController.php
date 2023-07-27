@@ -51,7 +51,7 @@ class UserController extends Controller
         return view('users.login');
     }
 
-    // Log user in (Authenticate user) (User login) i.e. AUTHENTICATION (submitting the previous login <form>)
+    // Log in the user in (Authenticate user) (User login) i.e. AUTHENTICATION (submitting the previous login <form>)
     public function authenticate(Request $request) {
         // Validation
         $formFields = $request->validate([

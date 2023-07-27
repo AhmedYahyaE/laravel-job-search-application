@@ -1,30 +1,22 @@
 {{-- The Single Listing Page --}} {{-- this page is opened from the <a> anchor link elements in listing-card.blade.php. $listing is passed from the route in web.php or the controller --}}
-
-
-{{-- @extends('layout') --}}
-<x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-
-{{-- @section('content') --}}
-    {{-- Include the Search Bar --}}
-    {{-- @include('partials._search') --}}
-
-
+<x-layout>
 
     <a href="/" class="inline-block text-black ml-4 mb-4"
-    ><i class="fa-solid fa-arrow-left"></i> Back
+    >
+        <i class="fa-solid fa-arrow-left"></i> Back
     </a>
     <div class="mx-4">
 
-        {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}}
         {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
-        <x-card class="p-10"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}} {{-- Check 1:32:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        <x-card class="p-10"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}}
 
             <div
                 class="flex flex-col items-center justify-center text-center"
             >
                 <img
                     class="w-48 mr-6 mb-6"
-                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}} {{-- For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}}
                     alt=""
                 />
 
@@ -34,7 +26,7 @@
 
 
                 {{-- Category Tags like 'laravel' tag, 'Vue' tag, 'API' tag, ... --}}
-                {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}} {{-- Check 1:28:17 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+                {{-- Blade Component: https://laravel.com/docs/9.x/blade#components --}} {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
                 <x-listing-tags :tagsCsv="$listing->tags" /> {{-- passing $listing->tags ($listing was passed to here from the controller) to the Blade Component (listing-tags.blade.php) --}} {{-- Passing Data To Components: https://laravel.com/docs/9.x/blade#passing-data-to-components --}}
 
 
@@ -68,38 +60,13 @@
                 </div>
             </div>
 
-        </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-
-
-
-        {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-        {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
-        {{-- <x-card class="mt-4 p-2 flex space-x-6"> -- }} {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}} {{-- Check 1:32:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+        </x-card>
             
-            
-            
-            <a href="/listings/{{ $listing->id }}/edit"> {{-- this will hit the get() method of the /listings/{listing}/edit route to hit the edit() method in ListingController.php --}}
-                <i class="fa-solid fa-pencil"></i> Edit
-            </a>
 
-
-
-            {{-- Fore the Delete functionality, check 3:09:15 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-            {{-- <form method="POST" action="/listings/{{ $listing->id }}"> --}} {{-- this will hit the delete() method of the /listings/{listing} route to hit the destroy() method in ListingController.php --}}
-                {{-- @csrf --}} {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
-                {{-- @method('DELETE') --}} {{-- HTML <form>-s can't make PUT, PATCH, or DELETE requests, so you need to add a hidden _method field to spoof these HTTP verbs, using @method() Blade directive --}} {{-- Method Field: https://laravel.com/docs/9.x/blade#method-field --}}
-
-                {{-- <button class="text-red-500">
-                    <i class="fa-solid fa-trash"></i> Delete
-                </button>
-            </form> --}}
-    
-
-     
-        {{-- </x-card> --}} {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
-        
-
+        <a href="/listings/{{ $listing->id }}/edit"> {{-- this will hit the get() method of the /listings/{listing}/edit route to hit the edit() method in ListingController.php --}}
+            <i class="fa-solid fa-pencil"></i> Edit
+        </a>
 
     </div>
-{{-- @endsection --}}
-</x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+
+</x-layout> 

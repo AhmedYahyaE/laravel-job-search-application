@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME); // For solving the error that shows up when assigning the 'guest' middleware to routes (because the 'guest' middleware, by default, redirects to a route/URL which is '/home' and not your typically used '/' route/URL that you typically use for denoting Home Pages), Check app\Providers\RouteServiceProvider.php file     AND     check 3:49:42 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 

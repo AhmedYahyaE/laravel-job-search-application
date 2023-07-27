@@ -44,10 +44,9 @@ class User extends Authenticatable
 
 
 
-    // For Relationships (and using foreignId(), constrained() and onDelete('cascade') methods), check 3:51:29 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
     // Relationship of a User `users` with Listing `listings`
-    public function listings() { // listings() in the PLURAL!    // A User `users` has many Listing `listings`, and the Foreign Key of the Relationship is the `user_id` column
-        return $this->hasMany(Listing::class, 'user_id'); // 'user_id' is the Foreign Key of the Relationhip
+    public function listings() { // A User `users` has many Listing `listings`, and the Foreign Key of the Relationship is the `user_id` column
+        return $this->hasMany(Listing::class, 'user_id');
     }
 
 }

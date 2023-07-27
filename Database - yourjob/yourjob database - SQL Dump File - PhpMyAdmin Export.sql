@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2023 at 12:23 AM
+-- Generation Time: Jul 27, 2023 at 10:32 PM
 -- Server version: 8.0.28
 -- PHP Version: 8.1.4
 
@@ -209,7 +209,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`

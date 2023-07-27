@@ -1,8 +1,8 @@
-<x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+<x-layout> 
     
-    {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+    {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}}
     {{-- Rendering Components: https://laravel.com/docs/9.x/blade#rendering-components --}}
-    <x-card class="p-10 max-w-lg mx-auto mt-24"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}} {{-- Check 1:32:53 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+    <x-card class="p-10 max-w-lg mx-auto mt-24"> {{--    class="p-10"    is passed in to the Blade Component using Component Attributes: https://laravel.com/docs/9.x/blade#component-attributes --}}
 
     {{-- <div
         class="bg-gray-50 border border-gray-200 p-10 rounded"
@@ -15,7 +15,7 @@
         </header>
 
         <form method="POST" action="/listings/{{ $listing->id }}" enctype="multipart/form-data"> {{-- this will hit the put() method of the /listings/{listing} route to hit the update() method in ListingController.php --}} {{-- Whenever you have a file <input> field (file upload/uploading files), you must include the attribute    enctype="multipart/form-data" --}}
-            @csrf {{-- To prevent this vulnerability, we need to inspect every incoming POST, PUT, PATCH, or DELETE request for a secret session value that the malicious application is unable to access --}} {{-- An Explanation Of The Vulnerability: https://laravel.com/docs/9.x/csrf#csrf-explanation --}}
+            @csrf
             @method('PUT') {{-- HTML <form>-s can't make PUT, PATCH, or DELETE requests, so you need to add a hidden _method field to spoof these HTTP verbs, using @method() Blade directive --}} {{-- Method Field: https://laravel.com/docs/9.x/blade#method-field --}}
 
             <div class="mb-6">
@@ -130,7 +130,6 @@
                 @enderror
             </div>
 
-            {{-- For File Upload (Uploading files), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
             <div class="mb-6">
                 <label for="logo" class="inline-block text-lg mb-2">
                     Company Logo
@@ -144,7 +143,7 @@
                 {{-- show the logo image, if exists. If it doesn't, show a default image --}}
                 <img
                     class="w-48 mr-6 mb-6"
-                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}} {{-- For File Upload (Uploading files) (using store() or storeAs() method, and the 'public' disk instead of Laravel's default disk 'local', and using the Symbolic Link by using the 'php artisan storage:link' command), check 2:45:14 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+                    src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}" {{-- Conditional Ternary Operator: if there's an image, show it. But, if there isn't, show a default image --}}
                     alt=""
                 />
 
@@ -187,6 +186,6 @@
             </div>
         </form>
 
-    </x-card> {{-- Slots (Blade Components Slots): https://laravel.com/docs/9.x/blade#slots --}} {{-- check 1:30:25 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+    </x-card>
 
-</x-layout> {{-- For using 'layout.blade.php' as a Blade Component, check 1:46:43 in https://www.youtube.com/watch?v=MYyJ4PuL4pY --}}
+</x-layout> 

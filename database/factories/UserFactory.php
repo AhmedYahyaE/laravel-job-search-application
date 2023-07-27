@@ -18,12 +18,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            // !! Check 53:52 in https://www.youtube.com/watch?v=MYyJ4PuL4pY  !!
-            // Check DatabaseSeeder.php file!!
-            // Eloquent Factories :https://laravel.com/docs/9.x/eloquent-factories
-            // Database Seeding: https://laravel.com/docs/9.x/seeding#using-model-factories
-            // When using Model Factories, if you want to (define hard-coded factories values) create a certain field/column (e.g. user) with certain field/column values you want them to be exactly a certain way (Hard-coded Database Seeding), inside the create() method of the factory, use an array and type in your desired fields/columns and their values. Check 3:52:38 in https://www.youtube.com/watch?v=MYyJ4PuL4pY
-
+            // Check DatabaseSeeder.php file
             // The column names of the `users` table
             'name'              => fake()->name(), // fake() which is FakerPHP, which is a PHP library to generate fake names, emails, hashed passwords, ...
             'email'             => fake()->unique()->safeEmail(),
