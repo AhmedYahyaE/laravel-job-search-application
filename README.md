@@ -1,7 +1,7 @@
 # Laravel Job Searching and Postings Application
 YourJob is a powerful and user-friendly Laravel application for searching for jobs and posting vacancies too. This application is designed to help job seekers find relevant job opportunities quickly and efficiently. With its intuitive interface, responsive/mobile first design, and advanced search capabilities, YourJob makes the job search process a breeze.
 
-Frontend technologies used: Tailwind CSS (Responsive Design).
+Frontend technologies used: Tailwind CSS (Responsive Design) and Alpine.js library.
 
 ## Screenshots:
 ### Homepage:
@@ -19,35 +19,23 @@ Frontend technologies used: Tailwind CSS (Responsive Design).
 ![YourJob-manage-listings-page](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/9268b566-8286-4401-8d56-204c0b80f98f)
 
 ## Features:
-1- Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Additionally, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
+1- Using a Scope Filter (Query Scopes) for both the Search Bar Form and Website Tags implementation.
 
-2- User Following System (Follow/Unfollow Button).
+2- Using Blade Components and Component Slots.
 
-3- Authorization using Laravel "Policies" classes.
+3- Using Database Seeders and Model Factories.
 
-4- Using Laravel Cache (caching) to optimize performance.
+4 - Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Additionally, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
 
-5- Using Eloquent Events / Model Events.
+5- Using Route Model Binding.
 
-6- Laravel Telescope.
+6- Using Alpine.js library for creating Session Flash Messages that disappears after a specified duration.
 
-7- Using SQLite, the lightweight database engine.
+7- Using Tailwind CSS for creating a completely responsive/mobile first design.
 
-8- Sending automatic Welcome emails to new registered users (using Mailable and Mailtrap).
+8- Eloquent Pagination.
 
-9- Making HTTP Requests to the server from the frontend using Axios JavaScript library.
-
-10- Using Vue.js Components.
-
-11 - Using "Intervention Image" package for handling and manipulation of user-uploaded images.
-
-12- Eloquent Pagination.
-
-13- User Profile Management.
-
-14-  User Registration, Authentication and Authorization.
-
-15- Using Webpack module bundler.
+9-  User Registration, Authentication and Authorization.
 
 ## Application Routes:
 All the application routes are defined in the [web.php](/routes/web.php) file.
