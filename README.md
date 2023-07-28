@@ -5,19 +5,18 @@ Frontend technologies used: Tailwind CSS (Responsive Design).
 
 ## Screenshots:
 ### Homepage:
-![instagram-clone-homepage](https://github.com/AhmedYahyaE/laravel-instagram-clone/assets/118033266/1225c585-4296-4f5a-9907-15183fb5c344)
+![YourJob-homepage-1](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/490a6643-c017-487d-8e04-dbedef494339)
 
-### User Profile:
-![instagram-clone-profile-page](https://github.com/AhmedYahyaE/laravel-instagram-clone/assets/118033266/a24e38c9-2ec4-45d1-bd3c-9de7dc3fb8e6)
+![YourJob-homepage-2](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/2c2cbf4e-95cf-4697-b185-7feacdfd2256)
 
-### User Following System (Follow/Unfollow Button):
-![instagram-profile-page-2](https://github.com/AhmedYahyaE/laravel-instagram-clone/assets/118033266/d698e19a-0a24-43eb-8717-50c8220bbac3)
+### Login Page:
+![YourJob-login](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/9e1d40ba-bd64-43a4-b228-3ed137fa5ddd)
 
-### User Profile Management:
-![instagram-clone-edit-profile](https://github.com/AhmedYahyaE/laravel-instagram-clone/assets/118033266/8b9f8ba0-d7f3-4601-a1de-fbd35b9f44d7)
+### Create a Job Listing Page:
+![YourJob-create-listing](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/3a908b85-5e20-4c6f-9d99-2f5c5e32eefd)
 
-### Adding Posts:
-![instagram-clone-add-new-post](https://github.com/AhmedYahyaE/laravel-instagram-clone/assets/118033266/6b597622-44de-488a-97f6-17ac21a2bfbb)
+### User Job Listings Management:
+![YourJob-manage-listings-page](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/9268b566-8286-4401-8d56-204c0b80f98f)
 
 ## Features:
 1- Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Additionally, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
