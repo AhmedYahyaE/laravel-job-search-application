@@ -50,18 +50,18 @@ All the application routes are defined in the [web.php](/routes/web.php) file.
 
 4- Create a MySQL database named **\`yourjob\`**, then import the **[yourjob database SQL Dump File](<Database - yourjob/yourjob database - SQL Dump File - phpMyAdmin Export.sql>)**.
 
-5- In case the application images are broken (are not loaded), recreate the Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory by removing/deleting the [public/storage](public/storage) directory first, then run the '***php artisan storage:link***' command.
+5- Navigate to the **[.env](.env)** file and configure/update it with your MySQL database credentials and other configuration settings.
 
-6- Run the '***php artisan serve***' command, and then open your browser and visit **http://127.0.0.1:8000** to access the Instagram Clone application.
+6- In case the application images are broken (are not loaded), recreate the Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory by removing/deleting the [public/storage](public/storage) directory first, then run the '***php artisan storage:link***' command.
+
+7- Run the '***php artisan serve***' command, and then open your browser and visit **http://127.0.0.1:8000** to access YourJob application.
 
 \*\* Ready-to-use registered accounts credentials you can use to log in:
-> **Profile 1**: Email Address: **test@test.com**, Password: **11111111**
+> Email: **test@test.com**, Password: **123456**
 
-> **Profile 2**: Email Address: **other@email.com**, Password: **11111111**
+> Email: **yasser@gmail.com**, Password: **123456**
     
-> **Profile 3**: Email Address: **test3@test.com**, Password: **11111111**
-
-> **Profile 4**: Email Address: **ramy.morsy@gmail.com**, Password: **11111111**
+> Email: **test2@test.com**, Password: **123456**
 
 ## Contribution:
 Contributions to my YourJob Laravel application are most welcome! If you find any issues or have suggestions for improvements or want to add new features, please open an issue or submit a pull request.
