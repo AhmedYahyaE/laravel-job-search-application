@@ -25,7 +25,7 @@ Frontend technologies used: Tailwind CSS (Responsive Design) and Alpine.js libra
 
 3- Using Database Seeders and Model Factories.
 
-4 - Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Additionally, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
+4 - Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Then, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
 
 5- Using Route Model Binding.
 
@@ -42,15 +42,17 @@ All the application routes are defined in the [web.php](/routes/web.php) file.
 
 ## Installation & Configuration:
 
-1- Open your terminal, and use the '***git clone https://github.com/AhmedYahyaE/laravel-instagram-clone.git***' command, or just download the ZIP project.
+1- Open your terminal, and use the '***git clone https://github.com/AhmedYahyaE/laravel-job-search-app.git***' command, or just download the ZIP project.
 
 2- Navigate/Change into (using the **cd** command) to the project root directory, then run the '***composer install***' command.
 
 3- Run the '***npm install***' command (and only in case you face any issues/errors, run the 'npm audit fix' command), and then run the '***npm run build***' command.
 
-4- Recreate the Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory by removing/deleting the [public/storage](public/storage) directory first, then run the '***php artisan storage:link***' command.
+4- Create a MySQL database named **\`yourjob\`**, then import the **[yourjob database SQL Dump File](<Database - yourjob/yourjob database - SQL Dump File - phpMyAdmin Export.sql>)**.
 
-5- Run the '***php artisan serve***' command, and then open your browser and visit **http://127.0.0.1:8000** to access the Instagram Clone application.
+5- In case the application images are broken (are not loaded), recreate the Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory by removing/deleting the [public/storage](public/storage) directory first, then run the '***php artisan storage:link***' command.
+
+6- Run the '***php artisan serve***' command, and then open your browser and visit **http://127.0.0.1:8000** to access the Instagram Clone application.
 
 \*\* Ready-to-use registered accounts credentials you can use to log in:
 > **Profile 1**: Email Address: **test@test.com**, Password: **11111111**
