@@ -40,7 +40,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
-    // Store a new listing (submitting the previous create() <form> (HTML Form Submission) Or INSERT-ing a record for the first time)
+    // Store a new listing (submitting the previous create() <form> (HTML Form Submission)
     public function store(Request $request) {
         // Validation
         $formFields = $request->validate([

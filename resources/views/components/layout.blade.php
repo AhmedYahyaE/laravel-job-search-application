@@ -40,8 +40,8 @@
                 ><img class="w-24" src="{{ asset('images/jobs-logo.jpg') }}" alt="" class="logo"
             /></a>
             <ul class="flex space-x-6 mr-6 text-lg">
-                {{-- To remove the 'Register' and 'Login' links from the website view and show 'Logout' link when there's a logged in user (after logging in), because the presence of 'Register' or 'Login' wouldn't make sense if the user is already logged in --}}
-                @auth {{-- Authentication Directives: https://laravel.com/docs/9.x/blade#authentication-directives --}}
+                {{-- To remove the 'Register' and 'Login' links from the website view and show 'Logout' link when there's a logged in user i.e. the user is authenticated/logged-in (after logging in), because the presence of 'Register' or 'Login' wouldn't make sense if the user is already logged in --}}
+                @auth {{-- If the current user is authenticated/logged-in --}} {{-- Authentication Directives: https://laravel.com/docs/9.x/blade#authentication-directives --}}
 
                     <li>
                         <span class="font-bold uppercase">
@@ -64,7 +64,7 @@
                         </form>
                     </li>
 
-                @else
+                @else {{-- If the current user is NOT authenticated/logged-in i.e. logged-out/guest/visitor --}}
                     
                     <li>
                         <a href="/register" class="hover:text-laravel"
