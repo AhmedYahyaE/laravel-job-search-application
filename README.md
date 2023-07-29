@@ -48,7 +48,7 @@ All the application routes are defined in the [web.php](/routes/web.php) file.
 
 3- Run the '***npm install***' command (and only in case you face any issues/errors, run the 'npm audit fix' command), and then run the '***npm run build***' command.
 
-4- Create a MySQL database named **\`yourjob\`**, then import the **[yourjob database SQL Dump File](<Database - yourjob/yourjob database - SQL Dump File - phpMyAdmin Export.sql>)**.
+4- Create a MySQL database named **\`yourjob\`**, then import the **[yourjob database SQL Dump File](<Database - yourjob/yourjob database - SQL Dump File - phpMyAdmin Export.sql>)** into your \`yourjob\` database.
 
 5- Navigate to the **[.env](.env)** file and configure/update it with your MySQL database credentials and other configuration settings.
 
