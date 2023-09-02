@@ -19,23 +19,25 @@ Frontend technologies used: Tailwind CSS (Responsive Design) and Alpine.js libra
 ![YourJob-manage-listings-page](https://github.com/AhmedYahyaE/laravel-job-search-app/assets/118033266/9268b566-8286-4401-8d56-204c0b80f98f)
 
 ## Features:
-1- Using a Scope Filter (Query Scopes) for both the Search Bar Form and Website Tags implementation.
+1- Implemented Social Login (Google OAuth provider) using Laravel Socialite package.
 
-2- Using Blade Components and Component Slots.
+2- Using a Scope Filter (Query Scopes) for both the Search Bar Form and Website Tags implementation.
 
-3- Using Database Seeders and Model Factories.
+3- Using Blade Components and Component Slots.
 
-4 - Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Then, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
+4- Using Database Seeders and Model Factories.
 
-5- Using Route Model Binding.
+5 - Using Laravel's '[storage](storage)' directory (public disk and local driver) for storing user-uploaded images (instead of the regular '[public](public)' directory). Then, using a Symbolic Link between the '[storage/app/public](storage/app/public)' directory and '[public/storage](public/storage)' directory to display images throughout the application.
 
-6- Using Alpine.js library for creating Session Flash Messages that disappears after a specified duration.
+6- Using Route Model Binding.
 
-7- Using Tailwind CSS for creating a completely responsive/mobile first design.
+7- Using Alpine.js library for creating Session Flash Messages that disappears after a specified duration.
 
-8- Eloquent Pagination.
+8- Using Tailwind CSS for creating a completely responsive/mobile first design.
 
-9-  User Registration, Authentication and Authorization.
+9- Eloquent Pagination.
+
+10-  User Registration, Authentication and Authorization.
 
 ## Application Routes:
 All the application routes are defined in the [web.php](/routes/web.php) file.
