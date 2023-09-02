@@ -60,6 +60,17 @@
                     Sign In
                 </button>
             </div>
+                        
+            {{-- Laravel Socialite package (Social Login) (Google) (N.B. Added by me!) --}}
+            <div class="mt-8">
+                <a
+                    href="http://127.0.0.1:8000/auth/google/redirect"
+                    style="display: inline-block; background-image: linear-gradient(to right, #4285F4, #DB4437, #F4B400, #0F9D58)" {{-- CSS Gradients --}}
+                    class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
+                >
+                    Sign In with your <b>Google</b> account (Social Login / Laravel Socialite)
+                </a>
+            </div>
 
             <div class="mt-8">
                 <p>

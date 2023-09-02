@@ -56,3 +56,10 @@ Route::get('/login', [App\Http\Controllers\UserController::class, 'login'])->nam
 
 // Log user in (User login) i.e. AUTHENTICATION (submitting the previous login <form>)
 Route::post('/users/authenticate', [\App\Http\Controllers\UserController::class, 'authenticate']);
+
+
+
+// Laravel Socialite package (Social Login) (Google) (N.B. Added by me!)
+// Google OAuth provider (Check the 'google' array key in config/services.php)
+Route::get('/auth/google/redirect', [App\Http\Controllers\SocialiteController::class, 'googleRedirect']);
+Route::get('/auth/google/callback', [App\Http\Controllers\SocialiteController::class, 'googleCallback']);

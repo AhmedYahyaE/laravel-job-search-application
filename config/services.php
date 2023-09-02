@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Laravel Socialite package (Social Login) (Google) (N.B. Added by me!)
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),     // Check .env file
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Check .env file
+        'redirect'      => 'http://127.0.0.1:8000/auth/google/callback', // The 'CALLBACK' URL, not the 'redirect' one    // This is the URL that I entered in https://console.cloud.google.com/
+    ],
+
 ];
