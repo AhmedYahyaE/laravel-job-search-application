@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class SocialiteController extends Controller
 {
@@ -23,7 +24,7 @@ class SocialiteController extends Controller
         // dd($googleUser);
 
         // If the user doesn't exist in the `users` database table, insert them, then log them in (authenticate them), but if they exist, get them from the `users` database table, then log them in (authenticate them) too (N.B. In both cases, we'll authenticate the user (log them in))
-        $user = \App\Models\User::updateOrCreate([ // if that email is found, update that record, but if not, create that whole record    // Upserts: https://laravel.com/docs/10.x/eloquent#upserts
+        $user = User::updateOrCreate([ // if that email is found, update that record, but if not, create that whole record    // Upserts: https://laravel.com/docs/10.x/eloquent#upserts
             'email' => $googleUser->email // Find that user by their email (because it has the unique constraint in the `users` table)
         ], [
             'name'     => $googleUser->name,

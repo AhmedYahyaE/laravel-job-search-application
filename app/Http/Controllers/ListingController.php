@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Listing;
 
 class ListingController extends Controller
 {
@@ -22,12 +23,12 @@ class ListingController extends Controller
         // 'Scope Filtering' of tags (the <a> HTML element in components/listing-tags.blade.php) and the Search Bar <form> in partials/_search.blade.php (which utilizes 'Query Scopes' (Local Scopes or Dynamic Scopes))
         // Query Scopes: https://laravel.com/docs/9.x/eloquent#query-scopes    // Local Scopes: https://laravel.com/docs/9.x/eloquent#local-scopes    // Dynamic Scopes: https://laravel.com/docs/9.x/eloquent#dynamic-scopes
         return view('listings.index', [ // passing data to view (will be used as variables in view) ('heading', 'listings')
-            'listings' => \App\Models\Listing::latest()->filter(request(['tag', 'search']))->paginate(6) // we call the scopeFilter() method in the Listing.php model    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6) // we call the scopeFilter() method in the Listing.php model    // we pass in 'tag' and 'search' as an ARRAY (where 'tag' comes from the <a> in components/listing-tags.blade.php, and 'search' comes from the search <form> in partials/_search.blade.php)
         ]);
     }
 
     // Show a SINGLE listing in listings/show.blade.php
-    public function show(\App\Models\Listing $listing) { // e.g. Action: show, Verb: GET, URI: /listings/{listing}, Route Name: listings.show
+    public function show(Listing $listing) { // e.g. Action: show, Verb: GET, URI: /listings/{listing}, Route Name: listings.show
         // dd($listing);
 
         return view('listings.show', [ // passing data to view (will be used as variables in view) ('listing')
@@ -66,14 +67,14 @@ class ListingController extends Controller
         $formFields['user_id'] = auth()->id(); // auth()->id()    is the `id` column of `users` table
 
         // For Mass Assignment with the create() method, and the $fillable and $guarded properties
-        \App\Models\Listing::create($formFields); // INSERT the VALIDATED <input> values
+        Listing::create($formFields); // INSERT the VALIDATED <input> values
  
 
         return redirect('/')->with('message', 'Listing created successfully!'); // redirect to the home page with a 'Flash Message'
     }
 
     // Render the Edit a Listing <form> in listings/edit.blade.php
-    public function edit(\App\Models\Listing $listing) {
+    public function edit(Listing $listing) {
         // dd($listing);
 
         return view('listings.edit', [ // passing data to view ('listing' will be used as variables in view) ($listing)
@@ -82,7 +83,7 @@ class ListingController extends Controller
     }
 
     // Update an already existing listing (submitting the previous edit() <form> Or UPDATE-ing an already existing record)
-    public function update(Request $request, \App\Models\Listing $listing) {
+    public function update(Request $request, Listing $listing) {
         // Make sure that the currently authenticated/logged in user is the OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
         if ($listing->user_id != auth()->id()) { // if that listing doesn't belong to the currently authenticated user, prevent that user from being able to edit that listing (Or another way to go is using Laravel Policies (Authorization)
             abort(403, 'Unauthorized Action');
@@ -119,7 +120,7 @@ class ListingController extends Controller
     }
 
     // Delete an already existing listing
-    public function destroy(\App\Models\Listing $listing) {
+    public function destroy(Listing $listing) {
         // Make sure that the currently authenticated/logged in user is an OWNER of the listing (We want the authenticated/logged in user to be able to Edit or Delete their OWN listings ONLY, and not be able to Edit or Delete other users' listings)
         if ($listing->user_id != auth()->id()) { // if the listing's `user_id` (in `listings` table) is not the same as the currently authenticated/logged in `id` (in `users` table)
             abort(403, 'Unauthorized Action');

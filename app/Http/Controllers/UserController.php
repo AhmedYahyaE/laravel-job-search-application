@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -27,7 +28,7 @@ class UserController extends Controller
 
 
         // Note: We'll register the user and IMMEDIATELY and AUTOMATICALLY and DIRECTLY LOGIN THEM! using the login() method    // Manually Authenticating Users: https://laravel.com/docs/9.x/authentication#authenticating-users
-        $user = \App\Models\User::create($formFields); // create (INSERT) the new registering user in the `users` table
+        $user = User::create($formFields); // create (INSERT) the new registering user in the `users` table
         // dd($user);
 
         // Login the user in IMMEDIATELY and AUTOMATICALLY and DIRECTLY after registration success!
